@@ -1,9 +1,8 @@
 import { Response } from "express";
 import { IUserAuthRequest } from "../../types/appTypes";
 
-// const { User } = require("../../models");
 
-const getCurrent = async (req:IUserAuthRequest, res:Response) => {
+const getCurrent = async (req:IUserAuthRequest, res:Response):Promise<void> => {
   const { email, subscription } = req.user;
   res.json({
     status: "success",

@@ -9,9 +9,10 @@ const { rename, unlink } = fsPromises;
 
 const avatarPath:string = path.join(__dirname, "../../", "public", "avatars");
 
-const updateAvatar = async (req: IUserAuthRequest, res: Response):Promise<Response> => {
+const updateAvatar = async (req: IUserAuthRequest, res: Response):Promise<void> => {
    if (!req.file) {
-    return res.status(400).json({ error: "No file provided" });
+    res.status(400).json({ error: "No file provided" });
+    return;
   }
   const { path: tmpUpload, originalname } = req.file;
   const { _id: id } = req.user;
@@ -40,7 +41,7 @@ const updateAvatar = async (req: IUserAuthRequest, res: Response):Promise<Respon
     await unlink(tmpUpload);
     throw error;
   }
-   return res.status(500).json({ error: "Internal server error" });
+   
 };
 
 export default  updateAvatar;

@@ -1,13 +1,15 @@
-import { Response, NextFunction } from 'express';
+import { Response, NextFunction, RequestHandler } from 'express';
 import { IUserAuthRequest,IUser,IJwtPayload } from '../types/appTypes';
 import { Unauthorized } from "http-errors";
 import jwt, { Secret } from "jsonwebtoken";
 import { User } from '../models';
+import { ParamsDictionary } from "express-serve-static-core";
+import { ParsedQs } from "qs";
 
 
 const { SECRET_KEY } = process.env;
 
-const authToken = async (req:IUserAuthRequest, res:Response, next:NextFunction) => {
+const authToken = async (req:IUserAuthRequest, res:Response, next:NextFunction):Promise<void> => {
   const { authorization = "" } = req.headers;
   const [bearer, token] = authorization.split(" ");
 
@@ -30,4 +32,4 @@ const authToken = async (req:IUserAuthRequest, res:Response, next:NextFunction) 
   }
 };
 
-export default authToken;
+export default authToken as unknown as RequestHandler<ParamsDictionary, any, any, ParsedQs, Record<string, any>>;

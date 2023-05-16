@@ -1,6 +1,7 @@
 import { Schema, model } from "mongoose";
 import Joi, { Schema as JoiSchema } from "joi";
 import { IUser } from "../types/appTypes";
+import bcrypt from "bcryptjs";
 
 const userSchema:Schema<IUser> = new Schema(
   {
@@ -37,6 +38,10 @@ const userSchema:Schema<IUser> = new Schema(
   },
   { versionKey: false, timestamps: true }
 );
+userSchema.methods.comparePassword = async function (password: string): Promise<boolean> {
+  return bcrypt.compare(password, this.password);
+};
+
 export const joiSchema:JoiSchema<IUser> = Joi.object({
   password: Joi.string().min(8).required(),
   email: Joi.string().required(),

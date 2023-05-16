@@ -17,8 +17,10 @@ export interface IError extends Error {
   
 }
 
-// export type ICtrlWrapper = RequestHandler<ParamsDictionary, any, any, ParsedQs, Record<string, any>>;
-export type ICtrlWrapper = (req:IUserAuthRequest, res:Response, next:NextFunction)=>Promise<void>
+
+export type ICtrlWrapper = (req: IUserAuthRequest, res: Response, next: NextFunction) => Promise<void>;
+
+
 
 export type ICallBack = (error: Error | null, destination: string) => void;
 
