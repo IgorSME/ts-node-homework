@@ -1,9 +1,9 @@
 
-import { Request, RequestHandler, Response,NextFunction } from "express";
+import { Request, Response,NextFunction } from "express";
 import { Schema, Document } from "mongoose";
 import { JwtPayload } from "jsonwebtoken";
-import { ParamsDictionary } from "express-serve-static-core";
-import { ParsedQs } from "qs";
+// import { ParamsDictionary } from "express-serve-static-core";
+// import { ParsedQs } from "qs";
 
 export interface IUserAuthRequest extends Request {
   user: {

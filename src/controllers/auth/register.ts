@@ -1,4 +1,4 @@
-import { Request,Response } from "express";
+import { Response } from "express";
 import { Conflict } from "http-errors";
 import bcrypt from "bcryptjs";
 import gravatar from "gravatar";

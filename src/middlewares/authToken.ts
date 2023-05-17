@@ -9,6 +9,7 @@ import { ParsedQs } from "qs";
 
 const { SECRET_KEY } = process.env;
 
+
 const authToken = async (req:IUserAuthRequest, res:Response, next:NextFunction):Promise<void> => {
   const { authorization = "" } = req.headers;
   const [bearer, token] = authorization.split(" ");
@@ -26,7 +27,7 @@ const authToken = async (req:IUserAuthRequest, res:Response, next:NextFunction):
     next();
   } catch (error:any) {
     if (error.message === "invalid signature") {
-      error.status = 401;
+     error.status = 401;
     }
     next(error);
   }

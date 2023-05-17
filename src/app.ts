@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from 'express';
+import express, { Request, Response } from 'express';
 import { IError } from './types/appTypes';
 import logger from 'morgan';
 import cors from 'cors';
@@ -26,9 +26,9 @@ app.use((req:Request, res:Response) => {
   res.status(404).json({ message: "Not found" });
 });
 
-app.use((err:IError, req:Request, res:Response, next:NextFunction) => {
+app.use((err:IError, req:Request, res:Response) => {
   const { status = 500, message = "Error server" } = err;
-  res.status(status).json({ message: err.message });
+  res.status(status).json({ message});
 });
 
 export default app;

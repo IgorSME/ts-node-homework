@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import {  Response } from "express";
 import { User } from "../../models";
 import { RequestError } from "../../middlewares";
 import { sendEmail } from "../../helpers";

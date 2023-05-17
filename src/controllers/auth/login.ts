@@ -1,4 +1,4 @@
-import { Request,Response } from "express";
+import { Response } from "express";
 import { Unauthorized } from "http-errors";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";

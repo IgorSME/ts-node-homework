@@ -16,7 +16,7 @@ const updateAvatar = async (req: IUserAuthRequest, res: Response):Promise<void> 
   }
   const { path: tmpUpload, originalname } = req.file;
   const { _id: id } = req.user;
-  const avatarName:string = `${id}_${originalname}`;
+  const avatarName = `${id}_${originalname}`;
 
   try {
     const resultUpload:string = path.join(avatarPath, avatarName);
@@ -26,7 +26,7 @@ const updateAvatar = async (req: IUserAuthRequest, res: Response):Promise<void> 
 
     await User.findByIdAndUpdate(id, { avatarURL });
     Jimp.read(resultUpload)
-      .then((image:any) => {
+      .then((image:Jimp) => {
         image.resize(250, 250).write(resultUpload);
       })
       .catch((err:Error) => {
@@ -37,7 +37,7 @@ const updateAvatar = async (req: IUserAuthRequest, res: Response):Promise<void> 
       code: 200,
       data: { avatarURL },
     });
-  } catch (error:any) {
+  } catch (error:unknown) {
     await unlink(tmpUpload);
     throw error;
   }
